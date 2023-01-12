@@ -1,0 +1,70 @@
+<section class="container p-4">
+    <section class="row col-6 p-3 bg color rounded mx-auto d-block border border-2 border-info bg-light">
+        <h2>Formulario de Contacto</h2>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()"> <!--(ngSubmit)="onSubmit()"-->
+            <!-- NOMBRE -->
+            <section class="col-8">
+                <label class="form-label text">Nombre:</label>
+                <input class="form-control" type="text" formControlName="name"
+                [ngStyle]="{'border-color':(form.get('name')?.invalid && (form.get('name')?.dirty || form.get('name')?.touched)) ? 'red': 'gray'}">
+                <!--Validacion -->
+                <section *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+                    <span *ngIf="form.get('name')?.errors required" class="error">El nombre es requerido</span>
+                    
+                </section>
+            </section>
+            <!-- EMAIL -->
+            <section class="col-8">
+                <label class="form-label text">Email:</label>
+                <input class="form-control" type="email" formControlName="email"
+                [ngStyle]="{'border-color':(form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)) ? 'red': 'grey'}">
+                <!-- Validacion -->
+                <section *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+                    <span *ngIf="form.get('email')?.errors email" class="error">El email ingresado no es válido</span>
+                </section>
+            </section>
+
+            <!-- TELEFONO-->
+            <section class="col-8">
+                <label for="telefono">Telefono: </label>
+                <input type="text" maxlength="9" class="form-control" 
+                [ngStyle]="{'border-color':(form.get('telefono')?.invalid && (form.get('telefono')?.dirty || form.get('telefono')?.touched)) ? 'red': 'grey'}"
+                formControlName="telefono">
+                <!-- Validacion -->
+                <section *ngIf="form.get('telefono')?.invalid && form.get('telefono')?.touched">
+                    <span *ngIf="form.get('telefono')?.errors required" class="error">El telefono solo son 9 digitos</span>  
+                </section>
+            </section>
+
+            <!-- ASUNTO -->
+            <section class="col-8">
+                <label class="form-label text">Asunto:</label>
+                <input class="form-control" type="text" formControlName="asunto"
+                [ngStyle]="{'border-color':(form.get('asunto')?.invalid && (form.get('asunto')?.dirty || form.get('asunto')?.touched)) ? 'red': 'gray'}">
+                <!--Validacion -->
+                <section *ngIf="form.get('asunto')?.invalid && form.get('asunto')?.touched">
+                    <span *ngIf="form.get('asunto')?.errors required" class="error">El asunto es requerido</span>
+                    
+                </section>
+            </section>
+
+
+            <!-- MENSAJE -->
+            <section class="col-8">
+                <label class="form-label text">Mensaje:</label>
+                <textarea class="form-control" formControlName="message"
+                [ngStyle]="{'border-color':(form.get('message')?.invalid && (form.get('message')?.dirty || form.get('message')?.touched)) ? 'red': 'grey'}"></textarea>
+                <!-- Validacion -->
+                <section *ngIf="form.get('message')?.invalid && form.get('message')?.touched">
+                <span *ngIf="form.get('message')?.errors required" class="error">El mensaje es requerido</span>
+                </section>
+            </section>
+
+            <!-- BUTTONS -->
+            <section class="col-6">
+                <button class="btn btn-primary m-2 text" type="submit" value="Enviar"  [disabled]="form.invalid">Enviar</button>
+                <button type="button" class="btn btn-success text" (click)="onClear()">Refrescar</button>
+            </section>
+        </form>
+    </section>    
+</section>    
